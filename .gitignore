@@ -1,0 +1,11 @@
+__pycache__/
+.DS_Store
+
+# never commit credentials
+.env
+.env.*
+*.key
+secrets.json
+
+# target list lives in the private sheet, not in this public repo
+targets.csv

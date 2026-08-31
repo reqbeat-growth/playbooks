@@ -1,0 +1,46 @@
+name: build
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: refuse to build if a key is hardcoded
+        run: |
+          if git grep -nIE 'REQBEAT_API_KEY[[:space:]]*=[[:space:]]*["'"'"'][A-Za-z0-9_-]{20,}' -- . ; then
+            echo "::error::An API key looks hardcoded in a tracked file. Use the repo secret instead."
+            exit 1
+          fi
+          echo "no hardcoded key found"
+
+      - name: generate pages
+        run: python generate.py
+        env:
+          REQBEAT_API_KEY: ${{ secrets.REQBEAT_API_KEY }}
+          TARGETS_URL: ${{ secrets.TARGETS_URL }}
+          # Interim publish target. Change this one line to
+          # https://playbooks.reqbeat.com once the handoff
+          # question is answered and this repo hands off to it: nothing
+          # else in the pipeline needs to change.
+          SITE_URL: https://reqbeat-growth.github.io/playbooks
+
+      - name: commit and push
+        run: |
+          git config user.name "playbooks-bot"
+          git config user.email "growth@reqbeat.com"
+          git add docs
+          git diff --cached --quiet || git commit -m "nightly build $(date -u -I)"
+          git push

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BD playbook · %%AGENCY%%</title>
+<meta property="og:title" content="Which companies should %%AGENCY%% call this week">
+<meta property="og:description" content="%%N_COMPANIES%% companies opened %%NICHE%% roles in %%GEO%% this week. Live, dated, from the Reqbeat corpus.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="%%SITE%%/%%SLUG%%/">
+<style>
+  :root { --ink:#111417; --gray:#6b7280; --faint:#9aa3ad; --line:#e5e7eb; --green:#15803d; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#fff; line-height:1.6; font-size:16px; }
+  .wrap { max-width:660px; margin:0 auto; padding:72px 24px 96px; }
+  .mono { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+  .label { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:11px; letter-spacing:.16em; color:var(--gray); text-transform:uppercase; }
+  h1 { font-size:28px; font-weight:650; letter-spacing:-.015em; line-height:1.25; margin:14px 0 16px; }
+  h2 { font-size:19px; font-weight:650; letter-spacing:-.01em; margin:0 0 14px; }
+  p { margin-bottom:14px; }
+  .gray { color:var(--gray); }
+  section { margin-top:64px; }
+
+  .statline { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; color:var(--ink); margin:18px 0 26px; }
+  .statline b { font-weight:600; }
+  .statline .sep { color:var(--faint); padding:0 6px; }
+
+  .sig { padding:16px 0; border-top:1px solid var(--line); }
+  .sig:last-of-type { border-bottom:1px solid var(--line); }
+  .sig .co { font-weight:600; }
+  .sig .role { color:var(--gray); }
+  .meta { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; color:var(--faint); margin-top:5px; }
+  .meta .up { color:var(--green); }
+
+  .mail { border:1px solid var(--line); padding:18px 20px; font-size:14.5px; color:#374151; margin:6px 0 12px; }
+  .mail .hdr { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; color:var(--faint); margin-bottom:10px; }
+
+  .play { margin-top:34px; }
+  .play .label { display:block; margin-bottom:6px; }
+  .play h3 { font-size:16.5px; font-weight:650; margin-bottom:8px; }
+  .play p { font-size:15px; }
+  .data { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12.5px; color:var(--gray); }
+  .data code { color:var(--ink); }
+
+  a { color:var(--ink); }
+  .arrow { display:inline-block; font-weight:600; text-decoration:none; border-bottom:1.5px solid var(--ink); padding-bottom:1px; margin-top:6px; }
+  .arrow:hover { color:var(--gray); border-color:var(--gray); }
+
+  .note { border-top:1px solid var(--line); margin-top:72px; padding-top:20px; font-size:13px; color:var(--gray); }
+  .note p { margin-bottom:8px; }
+  .foot { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; color:var(--faint); margin-top:26px; }
+  @media (max-width:480px){ .wrap{padding:48px 18px 72px} h1{font-size:24px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="label">Reqbeat · BD playbook</span>
+  <h1>Which companies should %%AGENCY%% call this week</h1>
+  <p class="gray">We watch job boards and company career pages across hundreds of sources and flag companies the morning they open a %%NICHE%% req. This page is your patch as it stands right now, and the plays to run on it. Every fact below is dated and pulled straight from the live corpus, never inferred.</p>
+
+  <section>
+    <span class="label">01 · The old way</span>
+    <h2>The email every agency sends</h2>
+    <div class="mail">
+      <div class="hdr">subject: Great candidates available</div>
+      Hi [Hiring Manager], I hope this finds you well. I work with exceptional %%NICHE%% professionals and wondered if you might be hiring this quarter. Happy to jump on a quick call...
+    </div>
+    <p class="gray">It dies because the sender does not know whether the company is hiring. The problem is not the message. It is not knowing who has a live, budgeted req today.</p>
+  </section>
+
+  <section>
+    <span class="label">02 · Your patch, live pull %%PULLED%%</span>
+    <h2>Companies with fresh %%NICHE%% reqs in %%GEO%%</h2>
+    <div class="statline"><b>%%N_COMPANIES%%</b> companies<span class="sep">·</span><b>%%N_REQS%%</b> open reqs<span class="sep">·</span><b>%%N_SURGE%%</b> in surge<span class="sep">·</span>rebuilt nightly</div>
+
+%%SIGNALS%%
+
+    %%TRIGGER_BLOCK%%
+  </section>
+
+  <section>
+    <span class="label">03 · Three plays</span>
+    <h2>What to run on this patch</h2>
+
+    <div class="play">
+      <span class="label">Play 01</span>
+      <h3>Surge-first mornings</h3>
+      <p>Sort the call list by hiring acceleration, not alphabet. The consultant who calls the day a req appears is first or second voice. By day ten they are ninth. The date on each row is the opening line.</p>
+      <div class="data">data: <code>/v1/reqs/search</code> · pulse ships velocity, surge and momentum precomputed</div>
+    </div>
+
+    <div class="play">
+      <span class="label">Play 02</span>
+      <h3>The repost-pain door-opener</h3>
+      <p>A role reposted for weeks is public proof the company cannot fill it: the moment a contingency agency stops being a cost and becomes a rescue. The opener writes itself: "Your role has been live six weeks. Want it closed by the 15th?"</p>
+      <div class="data">data: <code>/v1/companies/{id}/repost-pain</code> · reposted reqs with dates</div>
+    </div>
+
+    <div class="play">
+      <span class="label">Play 03</span>
+      <h3>The first-hire play</h3>
+      <p>A company making its first ever %%NICHE%% hire has a founder interviewing, no internal recruiter, no PSL. The most agency-friendly moment in a company's life, and it is detectable the day it appears.</p>
+      <div class="data">data: <code>/v1/companies/{id}/first-hire</code> · first hire in a function, dated</div>
+    </div>
+
+    <div class="play">
+      <span class="label">Play 04</span>
+      <h3>The permissionless sample</h3>
+      <p>Notice what this page just did: it gave you your market before asking for anything. Your desk can run the same move on client prospects: three live, dated facts about their niche before any pitch. The sample is the credential.</p>
+      <div class="data">data: any search above · three rows · dated</div>
+    </div>
+  </section>
+
+  <section>
+    <span class="label">04 · What changes</span>
+    <h2>One input, not your pitch</h2>
+    <p>Nothing about your fees, your scripts or your CRM changes. One input does: who you call, and on which morning. BD stops being a volume game aimed at a directory and becomes a timing game aimed at live, budgeted reqs. The companies above were on nobody's list last week.</p>
+  </section>
+
+  <section>
+    <span class="label">05 · Next</span>
+    <h2>The next ten signals for your patch are free</h2>
+    <p class="gray">No signup, no card, no call. Tell us your niche and geography; ten fresh signals with roles and dates land the same day, in a sheet, your CRM or your sending tool.</p>
+    <a class="arrow" href="https://reqbeat.com?utm_source=playbooks&utm_medium=page&utm_content=%%SLUG%%">Claim your 10 free signals →</a>
+  </section>
+
+  <div class="note">
+    <p>Data: Reqbeat live corpus, <span class="mono">/v1/reqs/search</span>, company pulse, <span class="mono">repost-pain</span>, <span class="mono">first-hire</span>. Sources include company ATS boards, deduplicated, rebuilt every 3 hours.</p>
+    <p>Method: pages exclude PSL-heavy household names an agency cannot realistically bill, and publish only when a patch carries five or more fresh signals. Takedown on request within 24 hours.</p>
+    <div class="foot">Page generated %%PULLED%% · for %%AGENCY%% · not affiliated · every fact dated and verifiable at source · © %%YEAR%% Reqbeat</div>
+  </div>
+
+</div>
+</body>
+</html>

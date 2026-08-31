@@ -1,0 +1,13 @@
+# Household names with heavy internal TA or fixed PSLs.
+# An agency cannot realistically bill them, so they never appear on a page.
+# One domain per line, lowercase. Refill from page reviews.
+monzo.com
+braze.com
+remote.com
+anaplan.com
+revolut.com
+wise.com
+starlingbank.com
+deliveroo.co.uk
+octopus.energy
+jetbrains.com

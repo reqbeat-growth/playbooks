@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://reqbeat-growth.github.io/playbooks/sitemap.xml
