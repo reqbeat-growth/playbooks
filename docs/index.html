@@ -4,25 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reqbeat BD playbooks</title>
-<meta name="robots" content="noindex">
+<meta property="og:title" content="Live BD playbooks for recruitment agencies">
+<meta property="og:description" content="Per-agency pages with live hiring signals, rebuilt nightly from the Reqbeat corpus.">
 <style>
-  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-         color:#111417; background:#fff; line-height:1.6; }
-  .wrap { max-width:660px; margin:0 auto; padding:80px 24px; }
-  h1 { font-size:26px; font-weight:650; letter-spacing:-.015em; margin:0 0 14px; }
-  p { color:#6b7280; margin:0 0 14px; }
-  .foot { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px;
-          color:#9aa3ad; margin-top:40px; border-top:1px solid #e5e7eb; padding-top:18px; }
-  a { color:#111417; }
+  :root { --ink:#111417; --gray:#6b7280; --faint:#9aa3ad; --line:#e5e7eb; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:#fff; line-height:1.6; font-size:16px; }
+  .wrap { max-width:660px; margin:0 auto; padding:72px 24px 96px; }
+  .label { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:11px; letter-spacing:.16em; color:var(--gray); text-transform:uppercase; }
+  h1 { font-size:28px; font-weight:650; letter-spacing:-.015em; line-height:1.25; margin:14px 0 16px; }
+  p { margin-bottom:14px; }
+  .gray { color:var(--gray); }
+  .sig { padding:16px 0; border-top:1px solid var(--line); }
+  .sig:last-of-type { border-bottom:1px solid var(--line); }
+  .sig .co { font-weight:600; color:var(--ink); text-decoration:none; border-bottom:1.5px solid var(--ink); padding-bottom:1px; }
+  .sig .co:hover { color:var(--gray); border-color:var(--gray); }
+  .meta { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; color:var(--faint); margin-top:5px; }
+  .note { border-top:1px solid var(--line); margin-top:72px; padding-top:20px; font-size:13px; color:var(--gray); }
+  .foot { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; color:var(--faint); margin-top:26px; }
+  @media (max-width:480px){ .wrap{padding:48px 18px 72px} h1{font-size:24px} }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>BD playbooks</h1>
-  <p>Per-agency hiring-signal pages: which companies in an agency's patch opened roles, what they are hiring for, and when each signal appeared.</p>
-  <p>No playbook is published yet. This is the address they will appear at, and the nightly build that publishes them is already wired to it.</p>
-  <p><a href="https://reqbeat.com?utm_source=playbooks&utm_medium=page&utm_content=index">What Reqbeat is</a> &middot; <a href="https://docs.reqbeat.com/docs">API docs</a></p>
-  <div class="foot">A page publishes only with 5 or more fresh signals. A thin patch means no page rather than an empty one.</div>
+  <span class="label">Reqbeat · BD playbooks</span>
+  <h1>Live playbooks, one per agency</h1>
+  <p class="gray">Each page below is a recruitment agency's patch as it stands right now: companies that opened roles in its niche this week, with dates, straight from the live corpus. Pages rebuild nightly and publish only when a patch carries five or more fresh signals.</p>
+
+
+
+  <div class="note">
+    <p>Built on the Reqbeat hiring-signals API. Any agency can ask for its page to be taken down; removal happens within 24 hours.</p>
+    <div class="foot">Last build 5 Sep 2026 · generator is open source</div>
+  </div>
 </div>
 </body>
 </html>
