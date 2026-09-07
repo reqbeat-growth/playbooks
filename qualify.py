@@ -132,7 +132,15 @@ def load_targets():
             text = r.read().decode("utf-8")
     else:
         text = (ROOT / "targets.csv").read_text(encoding="utf-8")
-    return list(csv.DictReader(io.StringIO(text)))
+    rows = list(csv.DictReader(io.StringIO(text)))
+    missing = {"slug", "status"} - set(rows[0] if rows else ())
+    if missing:
+        sys.exit(
+            "target list is not the CSV this expects (no "
+            + ", ".join(sorted(missing))
+            + " column). Check the sheet is published to the web as CSV."
+        )
+    return rows
 
 
 def main():
