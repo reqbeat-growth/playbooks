@@ -30,6 +30,7 @@ KEY = os.environ.get("REQBEAT_API_KEY", "")
 MIN_SIGNALS = 5
 MAX_AGE_DAYS = 14
 SLEEP_BETWEEN_CALLS = 0.6
+API_ERRORS = 0
 # Interim: growth's own Pages URL. Swap to https://playbooks.reqbeat.com only
 # once the handoff question is answered and this becomes the real
 # publish target: one env var, no code change.
@@ -63,6 +64,7 @@ def val(x):
 
 
 def api(path, params):
+    global API_ERRORS
     qs = urllib.parse.urlencode(params)
     req = urllib.request.Request(f"{BASE}{path}?{qs}", headers={"X-API-Key": KEY})
     for attempt in (1, 2):
@@ -73,9 +75,11 @@ def api(path, params):
             if e.code in (429, 500, 502, 503) and attempt == 1:
                 time.sleep(5)
                 continue
+            API_ERRORS += 1
             log("api_error", path=path, code=e.code)
             return None
         except Exception as e:  # noqa: BLE001 - network failure should not kill the batch
+            API_ERRORS += 1
             log("api_error", path=path, error=str(e))
             return None
     return None
@@ -268,6 +272,15 @@ def main():
                 {"slug": slug, "agency": row["agency_name"], "niche": row["niche_label"], "n": n}
             )
         time.sleep(SLEEP_BETWEEN_CALLS)
+
+    # Bail before write_gallery: an all-failed run must not overwrite the
+    # live gallery with an empty one.
+    if not generated and API_ERRORS:
+        sys.exit(
+            f"every API call failed ({API_ERRORS} errors) and no page was built. "
+            "Check REQBEAT_API_KEY: the API answers 401 with no key and 403 with a "
+            "bad or revoked one."
+        )
 
     write_gallery(generated)
     log("done", pages=len(generated))
