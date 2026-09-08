@@ -28,6 +28,7 @@ DOCS = ROOT / "docs"
 BASE = "https://api.reqbeat.com"
 KEY = os.environ.get("REQBEAT_API_KEY", "")
 MIN_SIGNALS = 5
+USER_AGENT = "reqbeat-playbooks/1.0 (+https://github.com/reqbeat-growth/playbooks)"
 MAX_AGE_DAYS = 14
 SLEEP_BETWEEN_CALLS = 0.6
 API_ERRORS = 0
@@ -66,7 +67,12 @@ def val(x):
 def api(path, params):
     global API_ERRORS
     qs = urllib.parse.urlencode(params)
-    req = urllib.request.Request(f"{BASE}{path}?{qs}", headers={"X-API-Key": KEY})
+    req = urllib.request.Request(
+        f"{BASE}{path}?{qs}",
+        # The API sits behind Cloudflare, which answers the default
+        # Python-urllib agent with 403 "error code: 1010".
+        headers={"X-API-Key": KEY, "User-Agent": USER_AGENT},
+    )
     for attempt in (1, 2):
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
