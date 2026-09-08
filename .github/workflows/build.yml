@@ -26,6 +26,19 @@ jobs:
           fi
           echo "no hardcoded key found"
 
+      # ponytail: temporary. Delete once the 403 is explained.
+      - name: preflight - what does the API say about this key
+        env:
+          REQBEAT_API_KEY: ${{ secrets.REQBEAT_API_KEY }}
+        run: |
+          printf 'key length: %s (expected 64)\n' "${#REQBEAT_API_KEY}"
+          printf 'key sha256: %s\n' "$(printf '%s' "$REQBEAT_API_KEY" | sha256sum | cut -c1-12)"
+          code=$(curl -s -o /tmp/body -w '%{http_code}' \
+            -H "X-API-Key: $REQBEAT_API_KEY" \
+            'https://api.reqbeat.com/v1/reqs/search?role=sales&geo=United+Kingdom&limit=1')
+          printf 'http: %s\n' "$code"
+          printf 'body: '; head -c 300 /tmp/body; echo
+
       - name: generate pages
         run: python generate.py
         env:

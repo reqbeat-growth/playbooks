@@ -76,7 +76,11 @@ def api(path, params):
                 time.sleep(5)
                 continue
             API_ERRORS += 1
-            log("api_error", path=path, code=e.code)
+            try:
+                detail = e.read().decode("utf-8", "replace")[:200]
+            except Exception:  # noqa: BLE001 - diagnosis must not mask the error
+                detail = ""
+            log("api_error", path=path, code=e.code, detail=detail)
             return None
         except Exception as e:  # noqa: BLE001 - network failure should not kill the batch
             API_ERRORS += 1
